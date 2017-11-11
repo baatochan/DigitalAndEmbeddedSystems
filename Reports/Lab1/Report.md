@@ -83,3 +83,49 @@ Po ich stworzeniu uświadomiliśmy sobie, że nie uprościliśmy ich całkowicie
 Schemat wyszedł bardzo nieczytelnie, ponieważ nie znaliśmy całkowitej funkcjonalności ISE (jak np. bramki z zanegowanymi sygnałami wejściowymi).
 
 ![Schemat bramek](schemat.png)
+
+## Symulacja układu
+### Plik VHDL
+
+W pliku VHDL do naszej symulacji zdefiniowaliśmy wektory sygnału wejściowego i wyjściowego:
+
+```
+COMPONENT schemat
+PORT( Data	:	IN	STD_LOGIC_VECTOR (3 DOWNTO 0);
+       Wy	:	OUT	STD_LOGIC_VECTOR (3 DOWNTO 0));
+END COMPONENT;
+
+SIGNAL Data	:	STD_LOGIC_VECTOR (3 DOWNTO 0);
+SIGNAL Wy	:	STD_LOGIC_VECTOR (3 DOWNTO 0);
+```
+
+Przypisaliśmy wektory do odpowiednich portów:
+
+```
+UUT: schemat PORT MAP(
+ Data => Data,
+ Wy => Wy
+);
+```
+
+Oraz napisaliśmy zmianę sygnału wejściowego w czasie (jedna linijka kodu):
+```
+Data <= X"0", X"1" after 100ns, X"2" after 200ns, X"3" after 300ns,
+X"4" after 400ns, X"5" after 500ns, X"6" after 600ns, X"7" after 700ns,
+X"8" after 800ns, X"9" after 900ns, X"A" after 1000ns, X"B" after 1100ns,
+X"C" after 1200ns, X"D" after 1300ns, X"E" after 1400ns, X"F" after 1500ns;
+```
+
+### Symulacja behawioralna
+
+Tak przygotowaną symulację VHDL uruchomiliśmy w trybie symulacji behawioralnej:
+
+![Symulacja behawioralna](behavioural.png)
+
+### Symulacja post-fit
+
+Następnie uruchomiliśmy symulację typu post-fit:
+
+![Symulacja post-fit](postfit.png)
+
+Obie symulacje przeszły poprawnie i wykazały, że stworzony przez nas schemat jest poprawny, więc przeszliśmy do implementacji na płytce.
