@@ -107,3 +107,27 @@ impact_impact.xwbt
 
 Thumbs.db
 .DS_Store
+
+# my gitignore
+
+**/netgen/
+**/schemat_html/
+sch2HdlBatchFile
+*.gyd
+*.jed
+*.jhd
+*.mfd
+*.nga
+*.pnx
+*.rpt
+*.tim
+*.tspec
+*.vhf
+*.vm6
+*.xml
+*.fdo
+*.tdo
+*.udo
+*.err
+wlftbdmbzb
+wlftwwf7me
