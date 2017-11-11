@@ -129,3 +129,31 @@ Następnie uruchomiliśmy symulację typu post-fit:
 ![Symulacja post-fit](postfit.png)
 
 Obie symulacje przeszły poprawnie i wykazały, że stworzony przez nas schemat jest poprawny, więc przeszliśmy do implementacji na płytce.
+
+## Implementacja na zestawie
+### Przygotowanie pliku .ucf
+
+Aby implementacja była możliwa musieliśmy przypisać nasze sygnały wejściowe i wyjściowe do fizycznych elementów zestawu.
+
+Sygnał wejściowy został przypisany do klawiszy:
+
+```
+# Keys
+NET "Data<0>" LOC = "P42";
+NET "Data<1>" LOC = "P40";
+NET "Data<2>" LOC = "P43";
+NET "Data<3>" LOC = "P38";
+```
+
+A sygnał wyjściowy został przypisany do diod LED:
+```
+# LEDS
+NET "Wy<0>"  LOC = "P35";
+NET "Wy<1>"  LOC = "P29";
+NET "Wy<2>"  LOC = "P33";
+NET "Wy<3>"  LOC = "P34";
+```
+
+### Właściwa implementacja
+
+Po przygotowaniu pliku .ucf wykonaliśmy właściwe programowanie układu. Po zaprogramowaniu układ działał, co zostało zaprezentowane prowadzącemu (wraz z wynikami symulacji obu typów).
