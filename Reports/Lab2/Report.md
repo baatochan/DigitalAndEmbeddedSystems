@@ -125,7 +125,7 @@ Sygnały wejściowe zostały przypisane do klawiszy:
 ```
 # Keys
 NET "CE" LOC = "P42";
-...
+(...)
 NET "RST" LOC = "P39";  # GSR
 ```
 A zegar do:
@@ -145,3 +145,36 @@ NET "Q(2)"  LOC = "P33";
 #### Właściwa implementacja
 
 Po przygotowaniu pliku .ucf wykonaliśmy właściwe programowanie układu. Po zaprogramowaniu układ działał, co zostało zaprezentowane prowadzącemu.
+
+## Realizacja zadania drugiego
+
+Drugie zadanie polegało na 'skompilowaniu' stworzonego wyżej układu do symbolu schematycznego (schematic symbol) i wykorzystaniu go wraz z drugim symbolem (pobranym z internetu) obsługującym wyświetlacz.
+
+### Schemat
+
+Wykorzystanie przygotowanego wcześniej symbolu wraz z HexTo7Seg nie wymagało dużo pracy i tak prezentuje się stworzony przez nas schemat:
+
+![Schemat bramek 2](schemat2.png)
+
+### Symulacja
+
+Do tego układu nie wykonywaliśmy symulacji.
+
+### Implementacja
+
+W celu implementacji musieliśmy dokonać drobnej zmiany w pliku .ucf.
+
+Sygnał Q(2:0) został odłączony od diod LED, a sygnał Displ7S został podłączony pod wyświetlacz:
+```
+# DISPL. 7-SEG
+(...)
+NET "Displ7S<0>" LOC = "P12";	# Seg. A; shared with LED<10>
+NET "Displ7S<1>" LOC = "P13";	# Seg. B; shared with LED<8>
+NET "Displ7S<2>" LOC = "P22";	# Seg. C; shared with LED<12>
+NET "Displ7S<3>" LOC = "P19";	# Seg. D; shared with LED<14>
+NET "Displ7S<4>" LOC = "P14";	# Seg. E; shared with LED<15>
+NET "Displ7S<5>" LOC = "P11";	# Seg. F; shared with LED<9>
+NET "Displ7S<6>" LOC = "P20";	# Seg. G; shared with LED<13>
+```
+
+Po tej zmianie schemat został zaprogramowany na płytce i układ działał, co zostało zaprezentowane prowadzącemu.
