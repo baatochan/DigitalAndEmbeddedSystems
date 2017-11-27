@@ -1,4 +1,4 @@
-# Układy cyfrowe i systemy wbudowane 1 - sprawozdanie z zajęć nr 1
+# Układy cyfrowe i systemy wbudowane 1 - sprawozdanie z zajęć nr 2
 
 #### Termin zajęć:
 13.11.2017
