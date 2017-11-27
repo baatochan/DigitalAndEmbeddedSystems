@@ -78,3 +78,70 @@ Daje nam to równanie:
 Daje nam to równanie:
 
 ![](rownanie3.png)
+
+### Schemat graficzny
+
+Mając powyższe równania stworzyliśmy poniższy schemat.
+
+![Schemat bramek](schemat.png)
+
+### Symulacja układu
+#### Plik VHDL
+Do przeprowadzenia symulacji potrzebowaliśmy zdefiniować początkowe wartości sygnałów wejściowych:
+```
+SIGNAL CLK	:	STD_LOGIC :='0';
+SIGNAL RST	:	STD_LOGIC :='0';
+SIGNAL CE	:	STD_LOGIC :='1';
+```
+Oraz zaprogramować ich działanie (zmianę).
+
+Programowanie zegara zostało wykonane jako:
+```
+CLK <= not CLK after 100 ns;
+```
+Celem przetestowania działania CE (clock enable) i RST (reset) zapisaliśmy dwie linijki:
+```
+RST <= '1' after 2000 ns, '0' after 2200 ns;
+CE <= '0' after 3000 ns, '1' after 4000 ns;
+```
+
+#### Symulacja behawioralna
+
+Tak przygotowaną symulację VHDL uruchomiliśmy w trybie symulacji behawioralnej:
+
+![Symulacja behawioralna](behavioural.png)
+
+#### Symulacja post-fit
+
+W trakcie zajęć uruchomiliśmy symulację post-fit, jednak w domu przy próbie ponownego jej uruchomienia pojawiał się błąd, który uniemożliwił nam przeprowadzenie jej.
+
+### Implementacja na zestawie
+#### Przygotowanie pliku .ucf
+
+Aby implementacja była możliwa musieliśmy przypisać nasze sygnały wejściowe i wyjściowe do fizycznych elementów zestawu.
+
+Sygnały wejściowe zostały przypisane do klawiszy:
+
+```
+# Keys
+NET "CE" LOC = "P42";
+...
+NET "RST" LOC = "P39";  # GSR
+```
+A zegar do:
+```
+# Clocks
+NET "CLK" LOC = "P7" | BUFG = CLK | PERIOD = 5ms HIGH 50%;
+```
+
+Sygnał wyjściowy został przypisany do diod LED:
+```
+# LEDS
+NET "Q(0)"  LOC = "P35";
+NET "Q(1)"  LOC = "P29";
+NET "Q(2)"  LOC = "P33";
+```
+
+#### Właściwa implementacja
+
+Po przygotowaniu pliku .ucf wykonaliśmy właściwe programowanie układu. Po zaprogramowaniu układ działał, co zostało zaprezentowane prowadzącemu.
