@@ -178,3 +178,25 @@ NET "Displ7S<6>" LOC = "P20";	# Seg. G; shared with LED<13>
 ```
 
 Po tej zmianie schemat został zaprogramowany na płytce i układ działał, co zostało zaprezentowane prowadzącemu.
+
+## Realizacja zadania trzeciego
+
+Tego zadania nie zdążyliśmy zrealizować z powodu niewystarczającej ilości czasu.
+
+### Schemat
+
+Znak '+' ma kod `43`, czyli `00101011` binarnie.
+
+Wykorzystując tą informacje za pomocą bramek ustawiliśmy aby inkrementacja licznika następowała tylko gdy taki kod zostanie odebrany.
+
+Z uwagi na małą ilość czasu i niedokładne zapoznanie się z dokumentacją błędnie pozostawiliśmy wyjście RS_RX wolnym.
+
+Stworzony przez nas schemat prezentuje się następująco:
+
+![Schemat bramek 3](schemat3.png)
+
+## Podsumowanie
+
+Dwa pierwsze zadania zrealizowaliśmy w całości i poprawnie, co potwierdza poprawna implementacja na płytce.
+
+Trzeciego zadania nie skończyliśmy z uwagi na małą ilość pozostałego czasu.
