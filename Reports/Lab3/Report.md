@@ -16,7 +16,7 @@ Zajęcia były podzielone na wykonanie dwóch niezależnych zadań. Różnicą o
 ### Zadanie pierwsze
 Zadanie pierwsze polegało na zamodelowaniu, zasymulowaniu i implementacji układu realizującego dodawanie X+5 i wyświetleniu wyniku na ekranie LCD.
 ### Zadanie drugie
-
+Realizacja ukłądu symulującego zachowanie licznika asynchronicznego dwukierunkowego odliczjącego '0, 2, 3, 4, 5, 1, 6, 7, 0, ...'.
 
 ## Realizacja zadania pierwszego
 ### Napisanie kodu VHDL
@@ -95,3 +95,72 @@ NET "Displ7S<6>" LOC = "P20";	# Seg. G; shared with LED<13>
 
 ### Właściwa implementacja
 Po przygotowaniu pliku .ucf wykonaliśmy właściwe programowanie układu. Po zaprogramowaniu układ działał, co zostało zaprezentowane prowadzącemu.
+
+## Realizacja zadania drugiego
+_W tym zadaniu źle zrozumieliśmy treść i wydawało się nam, że należy przygotować w VHDL układ decydujący jak mają następować zmiany na przeżutnikach i podłączyć go na schemacie do przeżutników._
+
+### Przygotowanie układu w VHDL
+
+Zdecydowaliśmy się na takie samo rozwiązanie jak w pierwszym zadaniu i nasz kod wygląda w ten sposób.
+
+```
+entity counter_inside is
+   PORT(  Q   :	IN	std_logic_vector(2 downto 0);
+          dir :   IN std_logic;
+          D	  :	OUT	std_logic_vector(2 downto 0));
+
+	variable X : bit_vector(3 downto 0) := "0000";
+end counter_inside;
+
+architecture Behavioral of counter_inside is
+begin
+   --02345167
+   X <= dir & Q;
+   with X select
+      D <= "000" when "1111",
+           "010" when "1000",
+           "011" when "1010",
+           "100" when "1011",
+           "101" when "1100",
+           "001" when "1101",
+           "110" when "1001",
+           "111" when "1110",
+           "111" when "0000",
+           "000" when "0010",
+           "010" when "0011",
+           "011" when "0100",
+           "100" when "0101",
+           "101" when "0001",
+           "001" when "0110",
+           "110" when others;
+
+end Behavioral;
+```
+
+### Podłączenie do schematu
+Taką skompilowaną skrzynkę podłączyliśmy na schemacie do przerzutników.
+
+![Schemat](schemat2.png)
+
+### Symulacja
+Do przeprowadenia symulacji przygotowaliśmy taki test7
+```
+SIGNAL DIR	:	STD_LOGIC :='0';
+SIGNAL CLK	:	STD_LOGIC :='0';
+SIGNAL RST	:	STD_LOGIC :='0';
+SIGNAL CE	:	STD_LOGIC :='1';
+SIGNAL Q	:	STD_LOGIC_VECTOR (2 DOWNTO 0);
+```
+
+```
+CLK <= not CLK after 100 ns;
+RST <= '1' after 2000 ns, '0' after 2200 ns, '1' after 8000 ns, '0' after 8200 ns;
+CE <= '0' after 3000 ns, '1' after 4000 ns, '0' after 9000 ns, '1' after 10000 ns;
+
+DIR <= '1' after 6000ns;
+```
+
+W momencie próby uruchomienia symulacji zobaczyliśmy, że nasz podsawowy układ jest błędny i mimo prób nie byliśmy w stanie tego poprawić. Gdy dowiedzieliśmy się, że i tak mieliśmy zrobić coś innego zostawiliśmy próby wyjaśnienia przyczyny błędu.
+
+## Podsumowanie
+Zadanie pierwsze zostało zrealizowane poprawnie, jednak drugie z uwagi na złe zrozumienie polecenia nam nie wyszło.
