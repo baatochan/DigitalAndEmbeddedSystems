@@ -8,13 +8,15 @@ entity counter_inside is
    PORT(  Q   :	IN	std_logic_vector(2 downto 0);
           dir :   IN std_logic;
           D	  :	OUT	std_logic_vector(2 downto 0));
+			 
+	variable X : bit_vector(3 downto 0) := "0000";
 end counter_inside;
 
 architecture Behavioral of counter_inside is
 begin
    --02345167
-   Q <= dir & Q;
-   with Q select
+   X <= dir & Q;
+   with X select
       D <= "000" when "1111",
            "010" when "1000",
            "011" when "1010",
