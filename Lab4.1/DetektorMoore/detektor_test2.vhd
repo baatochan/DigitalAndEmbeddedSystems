@@ -48,7 +48,7 @@ BEGIN
 
 -- *** Test Bench - User Defined Section ***
    process
-      variable arrBytes : std_logic_vector ( 0 to 20 ) := "110100111101100110011";
+      variable arrBytes : std_logic_vector ( 0 to 20 ) := "110 100111 101 100110 011";
    begin 
       wait for 300 ns;
       for i in arrBytes'RANGE loop

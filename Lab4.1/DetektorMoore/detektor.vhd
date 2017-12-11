@@ -10,7 +10,7 @@ entity detektor is
 end detektor;
 
 architecture Behavioral of detektor is
-type state_type is (q0,q1,q2,q3,q4,q5);
+type state_type is (q0,q1,q2,q3,q4,q5,q6);
 signal state, next_state : state_type;
 
 begin
@@ -52,8 +52,12 @@ begin
 				else next_state <= q1;
 				end if;
 			when q5 =>
-				if X = '1' then next_state <= q0;
+				if X = '1' then next_state <= q6;
 				else next_state <= q1;
+				end if;
+			when q6 =>
+				if X = '1' then next_state <= q1;
+				else next_state <= q0;
 				end if;
 		end case;
 	end process process_2;
@@ -66,7 +70,8 @@ begin
 				when q2 => Y <= '0';
 				when q3 => Y <= '0';
 				when q4 => Y <= '0';
-				when q5 => Y <= '1';
+				when q5 => Y <= '0';
+				when q6 => Y <= '1';
 			end case;
 		end process output;
 		
