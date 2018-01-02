@@ -114,6 +114,7 @@ Było kilka wytycznych jak ma on wyglądać:
 
 ```
 (...)
+
 --Inputs
 signal Clk : std_logic := '0';
 signal Rst : std_logic := '0';
@@ -144,7 +145,7 @@ end process;
 #### Efekt symulacji
 Sekwencja, której użyliśmy do symulacji: 110**100111**101**100110**011
 ![Symulacja automatu Moore'a](symulacja_moore.png)
-Symulacja na powyższym zdjęciu została przycięta na ostatniej 1, jednak nie było to istotne miejsce.
+
 
 ## Realizacja zadania w formie automatu Mealy'ego
 ### Graf
