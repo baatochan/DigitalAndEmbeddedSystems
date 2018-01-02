@@ -37,11 +37,11 @@ begin
 				end if;
 			when q1 =>
 				if X = '0' then next_state <= q2;
-				else next_state <= q0;
+				else next_state <= q1;
 				end if;
 			when q2 =>
 				if X = '0' then next_state <= q3;
-				else next_state <= q0;
+				else next_state <= q1;
 				end if;
 			when q3 =>
 				if X = '1' then next_state <= q4;
@@ -49,11 +49,11 @@ begin
 				end if;
 			when q4 =>
 				if X = '1' then next_state <= q5;
-				else next_state <= q1;
+				else next_state <= q0;
 				end if;
 			when q5 =>
 				if X = '1' then next_state <= q6;
-				else next_state <= q1;
+				else next_state <= q0;
 				end if;
 			when q6 =>
 				if X = '1' then next_state <= q1;
