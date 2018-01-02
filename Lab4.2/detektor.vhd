@@ -57,17 +57,7 @@ begin
 		end case;
 	end process process_2;
 	
-	output : process(state, previous_state, X)
-	begin
-		if state = q0 then
-			if previous_state = q5 then
-				if X = '1' then y <= '1';
-				else y <= '0';
-				end if;
-			else y <= '0';
-			end if;
-		else y <= '0';
-		end if;
-	end process output;
+	y <= '1' when state = q0 and previous_state = q5 and X = '1'
+	else '0';
 	
 end Behavioral;
