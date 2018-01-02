@@ -1,6 +1,0 @@
-[Inputs]
-dir
-=Q[2:0]=
-[Outputs]
-=D[2:0]=
-[BiDir]
