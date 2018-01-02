@@ -109,6 +109,7 @@ Było kilka wytycznych jak ma on wyglądać:
 * przypisania sygnału X miały odbywać się w pętli, z jawnym zastosowaniem `wait`, tak aby zmiana wartości X, następowała 5ns przed zboczem rosnącym.
 * częstotliwość zegara miała wynosić 40MHz.
 * na symulacji miał być widoczny sygnał `state`.
+
 #### Kod symulacyjny
 
 ```
@@ -144,3 +145,45 @@ end process;
 Sekwencja, której użyliśmy do symulacji: 110**100111**101**100110**011
 ![Symulacja automatu Moore'a](symulacja_moore.png)
 Symulacja na powyższym zdjęciu została przycięta na ostatniej 1, jednak nie było to istotne miejsce.
+
+## Realizacja zadania w formie automatu Mealy'ego
+### Graf
+
+![Graf dla formy Mealy'ego](graf_mealy.png)
+
+Zaprojektowany przez nas automat posiada:
+* alfabet wejściowy: 0, 1
+* stany wewnętrzne: q0, q1, q2, q3, q4, q5  
+_gdzie q0 jest stanem początkowym_
+* alfabet wyjściowy: 0, 1
+* funkcja przejść: _na grafie_
+* funkcja wyjścia:  _na grafie - 0/0 przy przejściu oznacza wartość x=0/y=0_
+
+### Kod VHDL wg. szablonu
+Przerobienie kodu na symulacje automatu Mealy'ego zajęło nam spore trudności i w tym miejscu zatrzymaliśmy się na zajęciach.
+W domu dokańczając zadanie doszliśmy do takiego rozwiązania:
+* Ilość stanów oczywiście uległa pomniejszeniu o jeden
+* Byliśmy zmuszeni dodać trzeci sygnał typu stanu - previous_state
+* Zachowanie dla q5 uległo zmianie na stałe przejście na q0
+* Część odpowiedzialna za generowanie sygnału y wygląda tak:
+```
+y <= '1' when state = q0 and previous_state = q5 and X = '1'
+else '0';
+```
+
+### Symulacja
+Wykonanie symulacji dla tej części tak na prawdę polegało na przekopiowaniu kodu napisanego dla poprzedniej części.
+
+Kod nie uległ żadnej zmianie, więc nie ma potrzeby wklejać go tutaj jeszcze raz.
+
+#### Efekt symulacji
+![Symulacja automatu Mealy'ego](symulacja_mealy.png)
+
+## Porównanie pracy automatów Moore'a i Mealy'ego
+Nie byliśmy w stanie zauważyć różnic w pracy obu automatów odbiegających od tego co wprost wynika z definicji, czyli, że automat nie wymaga dodatkowego/ych, specjalnego/ych stanu/ów kończącego/ych.
+
+## Programowanie sprzętu
+Jako, że nie dokończyliśmy automatu Mealy'ego w trakcie zajęć, nie zaczęliśmy nawet programowania sprzętu.
+
+## Wnioski
+Automat Mealy'ego mimo, że uproszczający schemat, jest o wiele trudniejszy w wykorzystaniu.
