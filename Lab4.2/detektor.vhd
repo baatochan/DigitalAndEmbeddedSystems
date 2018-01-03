@@ -11,7 +11,7 @@ end detektor;
 
 architecture Behavioral of detektor is
 type state_type is (q0,q1,q2,q3,q4,q5);
-signal state, next_state : state_type;
+signal state, next_state, previous_state : state_type;
 
 begin
 	
@@ -21,6 +21,7 @@ begin
 			if Rst = '1' then
 				state <= q0;
 			else 
+				previous_state <= state;
 				state <= next_state;
 			end if;
 		end if;
@@ -37,11 +38,11 @@ begin
 				end if;
 			when q1 =>
 				if X = '0' then next_state <= q2;
-				else next_state <= q0;
+				else next_state <= q1;
 				end if;
 			when q2 =>
 				if X = '0' then next_state <= q3;
-				else next_state <= q0;
+				else next_state <= q1;
 				end if;
 			when q3 =>
 				if X = '1' then next_state <= q4;
@@ -49,16 +50,14 @@ begin
 				end if;
 			when q4 =>
 				if X = '1' then next_state <= q5;
-				else next_state <= q1;
+				else next_state <= q0;
 				end if;
 			when q5 =>
-				if X = '1' then next_state <= q0;
-				else next_state <= q1;
-				end if;
+				next_state <= q0;
 		end case;
 	end process process_2;
 	
-   y <= '1' when state = q5 and next_state = q0
-   else '0';
-		
+	y <= '1' when state = q0 and previous_state = q5 and X = '1'
+	else '0';
+	
 end Behavioral;
