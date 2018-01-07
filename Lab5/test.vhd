@@ -84,7 +84,7 @@ BEGIN
       variable arrBytes : typeByteArray( 0 to 16 )
          := ( X"10", X"20", X"1D", X"44", X"32", X"2D", X"40", X"B4", X"1D", X"44", X"32", X"1D", X"44", X"32", X"2D", X"11", X"49" );
    begin
-      wait for 7.5 ns;
+      wait for 2.5 ns;
       for i in arrBytes'RANGE loop
          wait for 7.5 ns;
          D0 <= arrBytes(i);
