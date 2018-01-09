@@ -51,7 +51,9 @@ begin
 				state <= X"0";
 			else 
 				if D0_Rdy = '1' then
-               state <= next_state;
+               if F0 = '0' then
+                  state <= next_state;
+               end if;
             end if;
 			end if;
 		end if;
@@ -68,23 +70,34 @@ begin
 		
 		case state is
 			when X"0" =>
-				if D0 = X"32" and F0 = '0' then next_state <= X"1";
+				if D0 = X"32" then next_state <= X"1";
 				else next_state <= X"0";
 				end if;
 			when X"1" =>
-				if D0 = X"44" and F0 = '0' then next_state <= X"2";
-				else next_state <= X"0";
+				if D0 = X"44" then next_state <= X"2";
+				else 
+               if D0 = X"32" then next_state <= X"1";
+               else next_state <= X"0";
+               end if;
 				end if;
 			when X"2" =>
-				if D0 = X"32" and F0 = '0' then next_state <= X"3";
-				else next_state <= X"0";
+				if D0 = X"32" then next_state <= X"3";
+				else 
+               if D0 = X"32" then next_state <= X"1";
+               else next_state <= X"0";
+               end if;
 				end if;
 			when X"3" =>
-				if D0 = X"2D" and F0 = '0' then next_state <= X"4";
-				else next_state <= X"0";
+				if D0 = X"2D" then next_state <= X"4";
+				else 
+               if D0 = X"32" then next_state <= X"1";
+               else next_state <= X"0";
+               end if;
 				end if;
          when others => -- when X"4", innych nie powinien osiagnac
-				next_state <= X"0";
+				if D0 = X"32" then next_state <= X"1";
+				else next_state <= X"0";
+				end if;
 		end case;
 	end process process_2;
 		
