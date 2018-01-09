@@ -41,7 +41,9 @@ entity zamek is
 end zamek;
 
 architecture Behavioral of zamek is
-signal state, next_state : std_logic_vector(3 downto 0);
+type state_type is (a,b,c,d,e);
+signal state, next_state : state_type;
+signal state_o : std_logic_vector(3 downto 0);
 
 begin
 
@@ -51,7 +53,7 @@ begin
 	begin
 		if rising_edge(Clk) then
 			if Rst = '1' then
-				state <= X"0";
+				state <= a;
 			else 
 				if D0_Rdy = '1' then
                if F0 = '0' then
@@ -72,41 +74,57 @@ begin
 		next_state <= state;
 		
 		case state is
-			when X"0" =>
-				if D0 = X"32" then next_state <= X"1";
-				else next_state <= X"0";
+			when a =>
+				if D0 = X"32" then next_state <= b;
+				else next_state <= a;
 				end if;
-			when X"1" =>
-				if D0 = X"44" then next_state <= X"2";
+			when b =>
+				if D0 = X"44" then next_state <= c;
 				else 
-               if D0 = X"32" then next_state <= X"1";
-               else next_state <= X"0";
+               if D0 = X"32" then next_state <= b;
+               else next_state <= a;
                end if;
 				end if;
-			when X"2" =>
-				if D0 = X"32" then next_state <= X"3";
+			when c =>
+				if D0 = X"32" then next_state <= d;
+				else next_state <= a;
+				end if;
+			when d =>
+				if D0 = X"2D" then next_state <= e;
 				else 
-               if D0 = X"32" then next_state <= X"1";
-               else next_state <= X"0";
+               if D0 = X"32" then next_state <= b;
+               else 
+                  if D0 = X"44" then next_state <= c;
+                  else next_state <= a;
+                  end if;
                end if;
 				end if;
-			when X"3" =>
-				if D0 = X"2D" then next_state <= X"4";
-				else 
-               if D0 = X"32" then next_state <= X"1";
-               else next_state <= X"0";
-               end if;
-				end if;
-         when others => -- when X"4", innych nie powinien osiagnac
-				if D0 = X"32" then next_state <= X"1";
-				else next_state <= X"0";
+         when e =>
+				if D0 = X"32" then next_state <= b;
+				else next_state <= a;
 				end if;
 		end case;
 	end process process_2;
    
-   state_out <= X"FFFFFFFFFFFFFFF" & state;
+   process_3 : process(state,D0)
+	begin		
+		case state is
+			when a =>
+            state_o <= X"0";
+         when b =>
+            state_o <= X"1";
+			when c =>
+            state_o <= X"2";
+			when d =>
+            state_o <= X"3";
+         when e =>
+            state_o <= X"4";
+		end case;
+	end process process_3;
+   
+   state_out <= X"FFFFFFFFFFFFFFF" & state_o;
 		
-   y <= '1' when state = X"4"
+   y <= '1' when state = e
 	else '0';
 
 end Behavioral;
