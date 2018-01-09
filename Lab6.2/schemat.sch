@@ -43,7 +43,7 @@
         <port polarity="BiDirectional" name="LCD_D(3:0)" />
         <port polarity="Output" name="SF_CE" />
         <blockdef name="zamek">
-            <timestamp>2018-1-8T15:27:42</timestamp>
+            <timestamp>2018-1-8T16:1:50</timestamp>
             <rect width="64" x="320" y="84" height="24" />
             <line x2="384" y1="96" y2="96" x1="320" />
             <rect width="64" x="320" y="148" height="24" />

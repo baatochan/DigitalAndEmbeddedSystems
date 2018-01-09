@@ -46,8 +46,6 @@ signal state, next_state : state_type;
 signal state_o : std_logic_vector(3 downto 0);
 
 begin
-
-	blank_out <= X"FFFE";
    
 	process_1 : process(Clk, D0_Rdy)
 	begin
@@ -110,19 +108,22 @@ begin
 	begin		
 		case state is
 			when a =>
-            state_o <= X"0";
+            state_out <= X"FFFFFFFFFFFFFFF0";
+            blank_out <= X"FFFE";
          when b =>
-            state_o <= X"1";
+            state_out <= X"FFFFFFFFFFFFFF11";
+            blank_out <= X"FFFC";
 			when c =>
-            state_o <= X"2";
+            state_out <= X"FFFFFFFFFFFFF222";
+            blank_out <= X"FFF8";
 			when d =>
-            state_o <= X"3";
+            state_out <= X"FFFFFFFFFFFF3333";
+            blank_out <= X"FFF0";
          when e =>
-            state_o <= X"4";
+            state_out <= X"FFFFFFFFFFF44444";
+            blank_out <= X"FFE0";
 		end case;
 	end process process_3;
-   
-   state_out <= X"FFFFFFFFFFFFFFF" & state_o;
 		
    y <= '1' when state = e
 	else '0';
