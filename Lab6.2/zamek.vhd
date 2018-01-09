@@ -35,7 +35,9 @@ entity zamek is
            D0_Rdy : in  STD_LOGIC;
            F0 : in STD_LOGIC;
            D0   :	IN	std_logic_vector(7 downto 0);
-           Y : out  STD_LOGIC);
+           Y : out  STD_LOGIC;
+           state_out : out STD_LOGIC_VECTOR(63 downto 0);
+           blank_out : out STD_LOGIC_VECTOR(15 downto 0));
 end zamek;
 
 architecture Behavioral of zamek is
@@ -43,7 +45,8 @@ signal state, next_state : std_logic_vector(3 downto 0);
 
 begin
 
-	
+	blank_out <= X"FFFE";
+   
 	process_1 : process(Clk, D0_Rdy)
 	begin
 		if rising_edge(Clk) then
@@ -100,6 +103,8 @@ begin
 				end if;
 		end case;
 	end process process_2;
+   
+   state_out <= X"FFFFFFFFFFFFFFF" & state;
 		
    y <= '1' when state = X"4"
 	else '0';
