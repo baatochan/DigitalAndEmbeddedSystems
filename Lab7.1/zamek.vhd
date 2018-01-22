@@ -104,7 +104,7 @@ begin
 		end case;
 	end process process_2;
    
-   process_3 : process(state,next_state)
+   process_3 : process(state,next_state,D0_Rdy,F0)
 	begin
       case state is
          when d =>
@@ -114,13 +114,13 @@ begin
                WE <= '1';
             else WE <= '0';
             end if;
-         when a =>
-            --if next_state = a OR next_state = b then
+         when e =>
+            if (next_state = b OR next_state = a) AND D0_Rdy = '1' AND F0 = '0' then
                DI <= X"01"; --clear
                DnI <= '0';
                WE <= '1';
-            --else WE <= '0';
-            --end if;
+            else WE <= '0';
+            end if;
          when others =>
             WE <= '0';
             DnI <= '1';
