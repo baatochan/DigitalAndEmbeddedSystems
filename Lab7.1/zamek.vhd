@@ -108,16 +108,25 @@ begin
 	begin
       case state is
          when d =>
-            if next_state = e then WE <= '1';
+            if next_state = e then
+               DI <= X"23"; --#
+               DnI <= '1';
+               WE <= '1';
             else WE <= '0';
             end if;
+         when a =>
+            --if next_state = a OR next_state = b then
+               DI <= X"01"; --clear
+               DnI <= '0';
+               WE <= '1';
+            --else WE <= '0';
+            --end if;
          when others =>
-         WE <= '0';
+            WE <= '0';
+            DnI <= '1';
+            DI <= X"00";
       end case;
 	end process process_3;
-
-   DI <= X"23"; --#
-   DnI <= '1';
 
    y <= '1' when state = e
 	else '0';

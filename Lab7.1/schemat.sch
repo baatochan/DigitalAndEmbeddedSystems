@@ -35,7 +35,7 @@
         <port polarity="Output" name="SF_CE" />
         <port polarity="Input" name="RST2" />
         <blockdef name="zamek">
-            <timestamp>2018-1-22T14:12:18</timestamp>
+            <timestamp>2018-1-22T14:31:28</timestamp>
             <line x2="384" y1="224" y2="224" x1="320" />
             <line x2="384" y1="288" y2="288" x1="320" />
             <rect width="64" x="320" y="340" height="24" />
