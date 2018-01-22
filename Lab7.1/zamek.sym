@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <symbol version="7" name="zamek">
     <symboltype>BLOCK</symboltype>
-    <timestamp>2018-1-22T13:42:58</timestamp>
+    <timestamp>2018-1-22T14:12:16</timestamp>
     <pin polarity="Input" x="0" y="-224" name="Clk" />
     <pin polarity="Input" x="0" y="-160" name="Rst" />
     <pin polarity="Input" x="0" y="-96" name="D0_Rdy" />
@@ -20,10 +20,10 @@
         <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-32" type="pin D0(7:0)" />
         <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="312" y="-224" type="pin Y" />
         <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="312" y="224" type="pin WE" />
-        <line x2="384" y1="224" y2="224" x1="320" />
         <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="312" y="288" type="pin DnI" />
-        <line x2="384" y1="288" y2="288" x1="320" />
         <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="312" y="352" type="pin DI(7:0)" />
+        <line x2="384" y1="224" y2="224" x1="320" />
+        <line x2="384" y1="288" y2="288" x1="320" />
         <rect width="64" x="320" y="340" height="24" />
         <line x2="384" y1="352" y2="352" x1="320" />
         <line x2="0" y1="32" y2="32" x1="64" />

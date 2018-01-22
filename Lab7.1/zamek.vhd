@@ -59,9 +59,6 @@ begin
                end if;
             end if;
 			end if;
-         if state = e then
-            WE <= '1', '0' after 10ns;
-         end if;
 		end if;
 	end process process_1;
 -- kombinacja do zamka
@@ -107,12 +104,21 @@ begin
 		end case;
 	end process process_2;
    
-   process_3 : process(state,D0)
-	begin		
-      DI <= X"23"; --#
-      DnI <= '1';
+   process_3 : process(state,next_state)
+	begin
+      case state is
+         when d =>
+            if next_state = e then WE <= '1';
+            else WE <= '0';
+            end if;
+         when others =>
+         WE <= '0';
+      end case;
 	end process process_3;
-		
+
+   DI <= X"23"; --#
+   DnI <= '1';
+
    y <= '1' when state = e
 	else '0';
 
