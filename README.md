@@ -1,12 +1,10 @@
 # Digital And Embedded Systems
-VHDL projects done in Xilinx ISE Design Suite during Digital and Embedded Systems (Układy cyfrowe i systemy wbudowane 1) course at the University.
+VHDL projects done in Xilinx ISE Design Suite during Digital and Embedded Systems course (Układy Cyfrowe i Systemy Wbudowane 1) at the university.
 
 Authors: [Wojciech Ormaniec][Github TheMesoria], Bartosz Rodziewicz
 
-I'm very sorry that I didn't include the task descriptions for those solutions. I just don't have them anymore, nor remember what they were about. I'm pretty sure that nobody will find this repo useful because of that :/
+I tried my best to describe the task description for each labs. Every solution is widely described (:poland:) in the report which is in `/Reports/LabX/`. There are missing reports for last two labs, as we didn't have to do them.
 
-You can just try to understand them on your own as almost every task have simulation and/or schema files ready.
-
-The code was written for ZL-9572 and Spartan3E. More info can be found [here](http://www.zsk.ict.pwr.wroc.pl/zsk/dyd/intinz/uc/).
+The code was written for ZL-9572 (and the two last labs for Spartan3E). More info can be found [here](http://www.zsk.ict.pwr.wroc.pl/zsk/dyd/intinz/uc/) (:poland:).
 
 [Github TheMesoria]: https://github.com/TheMesoria
